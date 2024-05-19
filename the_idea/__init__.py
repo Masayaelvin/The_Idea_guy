@@ -7,3 +7,5 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.app_context().push()
 
 db = SQLAlchemy(app)
+
+from the_idea import routes
