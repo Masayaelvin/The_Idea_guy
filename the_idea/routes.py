@@ -29,9 +29,9 @@ def Projects():
 
 @app.route('/user_projects', methods = ['GET'])
 def user_projects():
-    user_projects = Users.query.all()
+    users = Users.query.all()
     user_projects = []
-    for user in user_projects:
+    for user in users:
         users_data = [
             {
                 'id': user.id,
