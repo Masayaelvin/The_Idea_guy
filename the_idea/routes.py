@@ -43,11 +43,22 @@ def user_projects():
     
 
 @app.route('/categories', methods = ['GET'])
-def categories(category):
+def categories():
     categories = Categories.query.all()
+    result = []
     for category in categories:
-        return jsonify([{
-            category : [{
-                category.projects
-            }]
-        }])
+        category_data = {
+            'category_id': category.category_id,
+            'category_name': category.category_name,
+            'projects': [{
+                'project_id': project.project_id,
+                'title': project.title,
+                'difficulty_level': project.difficulty_level,
+                'description': project.description,
+                'created_at': project.created_at,
+                'updated_at': project.updated_at
+            } for project in category.projects]
+        }
+        result.append(category_data)
+    
+    return jsonify(result)
