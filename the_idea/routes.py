@@ -14,7 +14,7 @@ def home():
     } for user in users])
 
 @app.route('/projects', methods = ['GET'])    
-def Projects():
+def all_Projects():
     projects = Projects.query.all()
     return jsonify([{
         'project_id': project.project_id,
