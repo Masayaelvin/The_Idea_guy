@@ -27,7 +27,7 @@ def Projects():
         'updated_at': project.updated_at
     } for project in projects])
 
-@app.route('user_projects', methods = ['GET'])
+@app.route('/user_projects', methods = ['GET'])
 def user_projects():
     user_projects = Projects.query.filter_by(user_id = '1').all()
     return jsonify([{
