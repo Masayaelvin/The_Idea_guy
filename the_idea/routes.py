@@ -29,17 +29,26 @@ def Projects():
 
 @app.route('/user_projects', methods = ['GET'])
 def user_projects():
-    user_projects = Projects.query.filter_by(user_id = '1').all()
-    return jsonify([{
-        'project_id': project.project_id,
-        'title': project.title,
-        'difficulty_level': project.difficulty_level,
-        'description': project.description,
-        'category_id': project.category_id,
-        'user_id': project.user_id,
-        'created_at': project.created_at,
-        'updated_at': project.updated_at
-    } for project in user_projects])
+    user_projects = Users.query.all()
+    user_projects = []
+    for user in user_projects:
+        users_data = [
+            {
+                'id': user.id,
+                'username': user.username,
+                'email': user.email,
+                'projects': [{
+                    'project_id': project.project_id,
+                    'title': project.title,
+                    'difficulty_level': project.difficulty_level,
+                    'description': project.description,
+                    'created_at': project.created_at,
+                    'updated_at': project.updated_at
+                } for project in user.projects]
+            }            
+        ]
+        user_projects.append(users_data)
+    return jsonify(user_projects)
     
 
 @app.route('/categories', methods = ['GET'])
