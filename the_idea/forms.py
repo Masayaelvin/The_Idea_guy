@@ -11,7 +11,12 @@ class RegistrationForm(FlaskForm):
     confirm_password = StringField('Confirm Password', validators=[DataRequired(), EqualTo('password')])
     submit = SubmitField('Sign Up')
     
-    
+class LoginForm(FlaskForm):
+    email = StringField('Email', validators=[DataRequired(), Email()])
+    password = StringField('Password', validators=[DataRequired()])
+    remember = BooleanField('Remember Me')
+    submit = SubmitField('Login')
+
 class ProjectForm(FlaskForm):
     category = SelectField('Category', choices=[(Categories.category_id, Categories.category_name) for category in Categories.query.all()], validators=[DataRequired()])
     title = StringField('Title', validators=[DataRequired()])
