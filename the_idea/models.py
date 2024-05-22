@@ -20,6 +20,7 @@ class Projects(db.Model):
     project_id = db.Column(db.String(20), primary_key=True)
     title = db.Column(db.String(80), nullable=False)
     difficulty_level = db.Column(db.String(50), nullable=False)
+    category = db.Column(db.String(50), nullable=False)
     description = db.Column(db.Text, nullable=False)
     category_id = db.Column(db.Integer, db.ForeignKey('categories.category_id'), nullable=False)
     user_id = db.Column(db.String(20), db.ForeignKey('users.id'), nullable=False)
