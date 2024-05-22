@@ -5,6 +5,11 @@ from flask import jsonify, render_template, redirect, url_for, flash
 from flask_bcrypt import Bcrypt
 import uuid
 
+
+@app.route('/', methods = ['GET'])
+def home():
+    return render_template('home.html')
+
 @app.route('/register', methods = ['POST'])
 def register():
     id = str(uuid.uuid4())
@@ -22,7 +27,7 @@ def register():
 
 '''the api routes for the project'''
 @app.route('/users', methods = ['GET'])
-def home():
+def users():
     users = Users.query.all()
     return jsonify([{
         'id': user.id,
