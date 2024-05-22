@@ -1,8 +1,27 @@
 from the_idea import app, db
 from the_idea.models import Users, Projects, Categories
-from flask import jsonify
+from the_idea.forms import RegistrationForm, LoginForm, ProjectForm, CategoryForm
+from flask import jsonify, render_template, redirect, url_for, flash
+from flask_bcrypt import Bcrypt
+import uuid
 
-@app.route('/', methods = ['GET'])
+@app.route('/register', methods = ['POST'])
+def register():
+    id = str(uuid.uuid4())
+    form = RegistrationForm()
+    if form.validate_on_submit():
+        encrpted_pwd = Bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+        user = Users(id = id, username = form.username.data, email = form.email.data, password = encrpted_pwd)
+        db.session.add(user)
+        db.session.commit()
+        return redirect(url_for('home'))
+    flash (f'Account for {form.username.data} has been created successfully', 'success')
+    return render_template('register.html', form = form)
+
+
+
+'''the api routes for the project'''
+@app.route('/users', methods = ['GET'])
 def home():
     users = Users.query.all()
     return jsonify([{
