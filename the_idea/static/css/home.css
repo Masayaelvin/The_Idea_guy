@@ -19,9 +19,11 @@ nav {
     padding: 0 20px;
 }
 
-.logo {
+.logo a{
     font-size: 1.5em;
     color: #ECF0F1;
+    text-decoration: none;
+
 }
 
 nav ul {
