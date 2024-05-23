@@ -2,7 +2,7 @@ from the_idea import app, db
 from the_idea.models import Users, Projects, Categories
 from the_idea.forms import RegistrationForm, LoginForm, ProjectForm, CategoryForm
 from flask import jsonify, render_template, redirect, url_for, flash
-from flask_bcrypt import Bcrypt
+from the_idea import bcrypt
 import uuid
 
 
@@ -10,14 +10,14 @@ import uuid
 def home():
     return render_template('home.html')
 
-@app.route('/login', methods=['GET'])
+@app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
     if form.validate_on_submit():
         user = Users.query.filter_by(email = form.email.data).first()
-        if user and Bcrypt.check_password_hash(user.password, form.password.data):
+        if user and bcrypt.check_password_hash(user.password, form.password.data):
             flash(f'Welcome {user.username}', 'success')
-            return redirect(url_for('home'))
+            return redirect(url_for('account'))
         else:
             flash('Login failed, please check your email and password', 'danger')
     return render_template('login.html', form = form)
@@ -28,7 +28,7 @@ def register():
     id = str(uuid.uuid4())
     form = RegistrationForm()
     if form.validate_on_submit():
-        encrpted_pwd = Bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+        encrpted_pwd = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
         user = Users(id = id, username = form.username.data, email = form.email.data, password = encrpted_pwd)
         db.session.add(user)
         db.session.commit()
@@ -36,7 +36,9 @@ def register():
     flash (f'Account for {form.username.data} has been created successfully', 'success')
     return render_template('register.html', form = form)
 
-
+@app.route('/account', methods = ['GET'])
+def account():
+    return render_template('account.html')
 
 '''the api routes for the project'''
 @app.route('/users', methods = ['GET'])

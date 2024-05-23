@@ -1,0 +1,18 @@
+{%extends 'layout.html'%}
+{%block content%}
+<head>
+    <title>Account - Idea Guy</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/account.css')}}">
+</head>
+<body>
+    <main>
+        <section class="account-container">
+            <h2>Account</h2>
+            <div class="account-info">
+                <h1>YOU HAVE LOGGED IN</h1>
+            </div>
+            <a href="/logout" class="btn">Logout</a>
+        </section>
+    </main>
+</body>
+{%endblock%}
