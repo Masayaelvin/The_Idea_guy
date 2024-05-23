@@ -40,6 +40,18 @@ def register():
 def account():
     return render_template('account.html')
 
+@app.route('/create_project', methods = ['GET', 'POST'])
+def create_idea():
+    form = ProjectForm()
+    if form.validate_on_submit():
+        project_id = str(uuid.uuid4())
+        project = Projects(project_id = project_id, title = form.title.data, difficulty_level = form.difficulty_level.data, description = form.description.data, category_id = form.category.data, user_id = '1')
+        db.session.add(project)
+        db.session.commit()
+        return redirect(url_for('account'))
+    flash(f'your Project_idea {form.title.data} has been created successfully', 'success')
+    return render_template('projects.html', form = form)
+
 '''the api routes for the project'''
 @app.route('/users', methods = ['GET'])
 def users():
