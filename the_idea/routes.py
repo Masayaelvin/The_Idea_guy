@@ -10,7 +10,20 @@ import uuid
 def home():
     return render_template('home.html')
 
-@app.route('/register', methods = ['POST'])
+@app.route('/login', methods=['GET'])
+def login():
+    form = LoginForm()
+    if form.validate_on_submit():
+        user = Users.query.filter_by(email = form.email.data).first()
+        if user and Bcrypt.check_password_hash(user.password, form.password.data):
+            flash(f'Welcome {user.username}', 'success')
+            return redirect(url_for('home'))
+        else:
+            flash('Login failed, please check your email and password', 'danger')
+    return render_template('login.html', form = form)
+
+
+@app.route('/register', methods = ['GET','POST'])
 def register():
     id = str(uuid.uuid4())
     form = RegistrationForm()

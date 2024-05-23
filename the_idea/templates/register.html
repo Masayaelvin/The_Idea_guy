@@ -3,26 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Idea Guy - Home</title>
-    <link rel="stylesheet" href="styles1.css">
+    <title>Register - Idea Guy</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/register.css')}}">
 </head>
 <body>
-    <header>
-        <nav>
-            <div class="logo">Idea Guy</div>
-            <ul>
-                <li><a href="/login">Login</a></li>
-                <li><a href="/register">Register</a></li>
-                <li><a href="/random-idea">Get Random Idea</a></li>
-                <li><a href="/view-ideas">View Ideas</a></li>
-            </ul>
-        </nav>
-    </header>
     <main>
-        <section class="hero">
-            <h1>Welcome to Idea Guy</h1>
-            <p>Your go-to source for endless project inspiration.</p>
-            <a href="/random-idea" class="btn">Get a Random Idea</a>
+        <section class="form-container">
+            <h2>Register</h2>
+            <form action="#" method="#">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <div class="form-group">
+                    <label for="confirm-password">Confirm Password</label>
+                    <input type="password" id="confirm-password" name="confirm_password" required>
+                </div>
+                <button type="submit" class="btn">Register</button>
+            </form>
         </section>
     </main>
 </body>
