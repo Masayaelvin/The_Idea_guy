@@ -3,6 +3,7 @@ from the_idea.models import Users, Projects, Categories
 from the_idea.forms import RegistrationForm, LoginForm, ProjectForm, CategoryForm
 from flask import jsonify, render_template, redirect, url_for, flash
 from the_idea import bcrypt
+from flask_login import login_user, current_user, logout_user, login_required
 import uuid
 import random
 
@@ -12,10 +13,13 @@ def home():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    if current_user.is_authenticated:
+        return redirect(url_for('account'))
     form = LoginForm()
     if form.validate_on_submit():
         user = Users.query.filter_by(email = form.email.data).first()
         if user and bcrypt.check_password_hash(user.password, form.password.data):
+            login_user(user, remember = form.remember.data)
             flash(f'Welcome {user.username}', 'success')
             return redirect(url_for('account'))
         else:
@@ -25,6 +29,8 @@ def login():
 
 @app.route('/register', methods = ['GET','POST'])
 def register():
+    if current_user.is_authenticated:
+        return redirect(url_for('account'))
     id = str(uuid.uuid4())
     form = RegistrationForm()
     if form.validate_on_submit():
@@ -45,7 +51,7 @@ def create_idea():
     form = ProjectForm()
     if form.validate_on_submit():
         project_id = str(uuid.uuid4())
-        project = Projects(project_id = project_id, title = form.title.data, difficulty_level = form.difficulty_level.data, description = form.description.data, category_id = form.category.data, user_id = '1')
+        project = Projects(project_id = project_id, title = form.title.data, difficulty_level = form.difficulty_level.data, description = form.description.data, category_id = form.category.data, user_id = current_user.id)
         db.session.add(project)
         db.session.commit()
         flash(f'your Project_idea {form.title.data} has been created successfully', 'success')
@@ -63,6 +69,11 @@ def create_category():
         flash(f'Category {form.category_name.data} has been created successfully', 'success')
         return redirect(url_for('account'))
     return render_template('categories.html', form = form, title = 'Create Category')
+
+@app.route('/logout', methods = ['GET'])
+def logout():
+    logout_user()
+    return redirect(url_for('home'))
 
 '''the api routes for the project'''
 @app.route('/users', methods = ['GET'])

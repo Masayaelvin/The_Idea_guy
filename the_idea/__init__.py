@@ -2,6 +2,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_ckeditor import CKEditor
 from flask_bcrypt import Bcrypt
+from flask_login import LoginManager
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your_secret_key'
@@ -10,6 +11,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///the_idea_guy.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.app_context().push()
 bcrypt =  Bcrypt(app)
+login_manager = LoginManager(app)
 
 ckeditor = CKEditor(app)
 db = SQLAlchemy(app)
