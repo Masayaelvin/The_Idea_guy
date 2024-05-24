@@ -32,8 +32,8 @@ def register():
         user = Users(id = id, username = form.username.data, email = form.email.data, password = encrpted_pwd)
         db.session.add(user)
         db.session.commit()
+        flash (f'Account for {form.username.data} has been created successfully', 'success')
         return redirect(url_for('home'))
-    flash (f'Account for {form.username.data} has been created successfully', 'success')
     return render_template('register.html', form = form)
 
 @app.route('/account', methods = ['GET'])
@@ -48,8 +48,8 @@ def create_idea():
         project = Projects(project_id = project_id, title = form.title.data, difficulty_level = form.difficulty_level.data, description = form.description.data, category_id = form.category.data, user_id = '1')
         db.session.add(project)
         db.session.commit()
+        flash(f'your Project_idea {form.title.data} has been created successfully', 'success')
         return redirect(url_for('account'))
-    flash(f'your Project_idea {form.title.data} has been created successfully', 'success')
     return render_template('projects.html', form = form)
 
 '''the api routes for the project'''
@@ -77,11 +77,15 @@ def all_Projects():
         'created_at': project.created_at,
         'updated_at': project.updated_at
     } for project in projects])
+    
+@app.route('/random_idea', methods = ['GET'])
+def random_idea():
+    ideas = all_Projects()
+    pass
 
 @app.route('/user_projects', methods = ['GET'])
 def user_projects():
     users = Users.query.all()
-    user_projects = []
     for user in users:
         users_data = [
             {
@@ -99,13 +103,12 @@ def user_projects():
             }            
         ]
         user_projects.append(users_data)
-    return jsonify(user_projects)
+    return jsonify(users_data)
     
 
 @app.route('/categories', methods = ['GET'])
 def categories():
     categories = Categories.query.all()
-    result = []
     for category in categories:
         category_data = {
             'category_id': category.category_id,
@@ -119,6 +122,5 @@ def categories():
                 'updated_at': project.updated_at
             } for project in category.projects]
         }
-        result.append(category_data)
-    
-    return jsonify(result)
+           
+    return jsonify(category_data)
