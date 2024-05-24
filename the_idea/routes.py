@@ -1,7 +1,7 @@
 from the_idea import app, db
 from the_idea.models import Users, Projects, Categories
 from the_idea.forms import RegistrationForm, LoginForm, ProjectForm, CategoryForm
-from flask import jsonify, render_template, redirect, url_for, flash
+from flask import jsonify, render_template, redirect, url_for, flash, request
 from the_idea import bcrypt
 from flask_login import login_user, current_user, logout_user, login_required
 import uuid
@@ -20,8 +20,9 @@ def login():
         user = Users.query.filter_by(email = form.email.data).first()
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user, remember = form.remember.data)
+            next_page = request.args.get('next')
             flash(f'Welcome {user.username}', 'success')
-            return redirect(url_for('account'))
+            return redirect(next_page) if next_page else redirect(url_for('account'))
         else:
             flash('Login failed, please check your email and password', 'danger')
     return render_template('login.html', form = form, title = 'Login')
@@ -43,11 +44,13 @@ def register():
     return render_template('register.html', form = form, title = 'Register')
 
 @app.route('/account', methods = ['GET'])
+@login_required
 def account():
     return render_template('account.html')
 
 @app.route('/create_project', methods = ['GET', 'POST'])
-def create_idea():
+@login_required
+def create_idea():  
     form = ProjectForm()
     if form.validate_on_submit():
         project_id = str(uuid.uuid4())

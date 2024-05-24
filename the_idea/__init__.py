@@ -12,6 +12,8 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.app_context().push()
 bcrypt =  Bcrypt(app)
 login_manager = LoginManager(app)
+login_manager.login_view = 'login' 
+login_manager.login_message_category = 'info'
 
 ckeditor = CKEditor(app)
 db = SQLAlchemy(app)
