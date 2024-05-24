@@ -35,7 +35,7 @@ class Projects(db.Model):
 
 # This is the table for the categories of projects
 class Categories(db.Model):
-    category_id = db.Column(db.Integer, primary_key=True)
+    category_id = db.Column(db.String(20), primary_key=True)
     category_name = db.Column(db.String(50), nullable=False)
     created_at = db.Column(db.DateTime, default=db.func.current_timestamp())
     updated_at = db.Column(db.DateTime, default=db.func.current_timestamp())
@@ -45,4 +45,4 @@ class Categories(db.Model):
 
 # This line creates the tables in the database
 # db.drop_all()
-# db.create_all()
+db.create_all()
