@@ -4,7 +4,7 @@ from the_idea.forms import RegistrationForm, LoginForm, ProjectForm, CategoryFor
 from flask import jsonify, render_template, redirect, url_for, flash
 from the_idea import bcrypt
 import uuid
-
+import random
 
 @app.route('/', methods = ['GET'])
 def home():
@@ -20,7 +20,7 @@ def login():
             return redirect(url_for('account'))
         else:
             flash('Login failed, please check your email and password', 'danger')
-    return render_template('login.html', form = form)
+    return render_template('login.html', form = form, title = 'Login')
 
 
 @app.route('/register', methods = ['GET','POST'])
@@ -34,7 +34,7 @@ def register():
         db.session.commit()
         flash (f'Account for {form.username.data} has been created successfully', 'success')
         return redirect(url_for('home'))
-    return render_template('register.html', form = form)
+    return render_template('register.html', form = form, title = 'Register')
 
 @app.route('/account', methods = ['GET'])
 def account():
@@ -50,7 +50,19 @@ def create_idea():
         db.session.commit()
         flash(f'your Project_idea {form.title.data} has been created successfully', 'success')
         return redirect(url_for('account'))
-    return render_template('projects.html', form = form)
+    return render_template('projects.html', form = form, title = 'Create Project')
+
+@app.route('/create_category', methods = ['GET', 'POST'])
+def create_category():
+    form = CategoryForm()
+    if form.validate_on_submit():
+        category_id = str(uuid.uuid4())
+        category = Categories(category_id = category_id, category_name = form.category_name.data)
+        db.session.add(category)
+        db.session.commit()
+        flash(f'Category {form.category_name.data} has been created successfully', 'success')
+        return redirect(url_for('account'))
+    return render_template('categories.html', form = form, title = 'Create Category')
 
 '''the api routes for the project'''
 @app.route('/users', methods = ['GET'])
@@ -81,6 +93,7 @@ def all_Projects():
 @app.route('/random_idea', methods = ['GET'])
 def random_idea():
     ideas = all_Projects()
+    
     pass
 
 @app.route('/user_projects', methods = ['GET'])
