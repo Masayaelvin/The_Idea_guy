@@ -9,7 +9,7 @@ import random
 
 @app.route('/', methods = ['GET'])
 def home():
-    return render_template('home.html')
+    return render_template('home.html', title = 'Home')
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -46,7 +46,9 @@ def register():
 @app.route('/account', methods = ['GET'])
 @login_required
 def account():
-    return render_template('account.html')
+    projects = user_projects()
+    my_projects = Projects.query.filter_by(user_id = current_user.id)
+    return render_template('account.html', projects = projects, my_projects = my_projects, title = 'Account')
 
 @app.route('/create_project', methods = ['GET', 'POST'])
 @login_required
@@ -62,6 +64,7 @@ def create_idea():
     return render_template('projects.html', form = form, title = 'Create Project')
 
 @app.route('/create_category', methods = ['GET', 'POST'])
+@login_required
 def create_category():
     form = CategoryForm()
     if form.validate_on_submit():
@@ -107,7 +110,6 @@ def all_Projects():
 @app.route('/random_idea', methods = ['GET'])
 def random_idea():
     ideas = all_Projects()
-    
     pass
 
 @app.route('/user_projects', methods = ['GET'])
@@ -129,7 +131,6 @@ def user_projects():
                 } for project in user.projects]
             }            
         ]
-        user_projects.append(users_data)
     return jsonify(users_data)
     
 

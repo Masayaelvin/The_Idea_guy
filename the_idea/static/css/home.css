@@ -19,17 +19,18 @@ nav {
     padding: 0 20px;
 }
 
-.logo a{
+.logo a {
     font-size: 1.5em;
     color: #ECF0F1;
     text-decoration: none;
-
 }
 
 nav ul {
     list-style: none;
     display: flex;
     gap: 20px;
+    margin: 0;
+    padding: 0;
 }
 
 nav ul li a {
@@ -73,4 +74,33 @@ nav ul li a:hover {
 
 .btn:hover {
     background-color: #C0392B;
+}
+
+/* Responsive Styles */
+.menu-icon {
+    display: none;
+    font-size: 1.5em;
+    color: #ECF0F1;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    nav ul {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background-color: #2C3E50;
+    }
+
+    nav ul.active {
+        display: flex;
+    }
+
+    nav ul li {
+        text-align: center;
+    }
+
+    .menu-icon {
+        display: block;
+    }
 }

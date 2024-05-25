@@ -6,12 +6,33 @@
 </head>
 <body>
     <main>
-        <section class="account-container">
-            <h2>Account</h2>
-            <div class="account-info">
-            </div>
-        </section>
-        <a href="/logout" class="btn">Logout</a>
+        <div class="account-container">
+            <aside class="sidebar">
+                <ul>
+                    <li><a href="{{ url_for('create_idea') }}">Create Idea</a></li>
+                    <li><a href="{{ url_for('create_category') }}">Create Category</a></li>
+                    <li><a href="{{ url_for('user_projects') }}" class="active">My Projects</a></li>
+                </ul>
+            </aside>
+            <section class="content">
+                <h2>My Projects</h2>
+                <ul class="project-list">
+                    {% for project in my_projects %}
+                    <li>
+                        <h3>{{ project.title }}</h3>
+                        <p>{{ project.description }}</p>
+                        <p><strong>Category:</strong> {{ project.category_name }}</p>
+                        <p><strong>Difficulty Level:</strong> {{ project.difficulty_level }}</p>    
+                        <div class="project_view">
+                            {{project.description}}
+                        </div>
+                    </li>
+                    {% endfor %}
+
+                </ul>
+            </section>
+        </div>
+        <a href="{{url_for('logout')}}" class="btn">Logout</a>
     </main>
 </body>
 {%endblock%}
