@@ -113,7 +113,8 @@ def all_Projects():
 @app.route('/random_idea', methods = ['GET'])
 def random_idea():
     ideas = all_Projects()
-    pass
+    random_idea = random.choice(ideas)
+    return render_template('random_idea.html', random_idea = random_idea, title = 'Random Idea')
 
 @app.route('/user_projects', methods = ['GET'])
 def user_projects():
