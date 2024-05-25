@@ -75,6 +75,44 @@ nav ul li a:hover {
 .btn:hover {
     background-color: #C0392B;
 }
+nav ul li a.active {
+    background-color: #18BC9C;
+}
+
+/* Flash message styles */
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    max-width: 600px;
+    margin: 20px auto;
+    text-align: center;
+}
+
+.alert-success {
+    color: white;
+    background-color: #47b849;
+    border-color: #d6e9c6;
+}
+
+.alert-danger {
+    color: white;
+    background-color: #cc4a4a;
+    border-color: #ebccd1;
+}
+
+.alert-warning {
+    color: #fcf8e3;
+    background-color: #e8a32e;
+    border-color: #faebcc;
+}
+
+.alert-info {
+    color:white ;
+    background-color: #4fddf0;
+    border-color: #bce8f1;
+}
 
 /* Responsive Styles */
 .menu-icon {
@@ -104,3 +142,4 @@ nav ul li a:hover {
         display: block;
     }
 }
+

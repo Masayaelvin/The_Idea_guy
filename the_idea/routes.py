@@ -39,8 +39,8 @@ def register():
         user = Users(id = id, username = form.username.data, email = form.email.data, password = encrpted_pwd)
         db.session.add(user)
         db.session.commit()
-        flash (f'Account for {form.username.data} has been created successfully', 'success')
-        return redirect(url_for('home'))
+        flash (f'Account for {form.username.data} has been created successfully you can now log in', 'success')
+        return redirect(url_for('login'))
     return render_template('register.html', form = form, title = 'Register')
 
 @app.route('/account', methods = ['GET'])
@@ -48,7 +48,8 @@ def register():
 def account():
     projects = user_projects()
     my_projects = Projects.query.filter_by(user_id = current_user.id)
-    return render_template('account.html', projects = projects, my_projects = my_projects, title = 'Account')
+    length = len(my_projects.all())
+    return render_template('account.html', projects = projects, my_projects = my_projects, title = 'Account', length = length)
 
 @app.route('/create_project', methods = ['GET', 'POST'])
 @login_required
@@ -80,6 +81,8 @@ def create_category():
 def logout():
     logout_user()
     return redirect(url_for('home'))
+
+
 
 '''the api routes for the project'''
 @app.route('/users', methods = ['GET'])
