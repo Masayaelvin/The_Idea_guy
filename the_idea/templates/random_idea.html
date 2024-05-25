@@ -1,1 +1,19 @@
-{{random_idea}}
+{% extends 'layout.html'%}
+{%block content%}
+<head>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/random_idea.css')}}">
+</head>
+<section class="ideas-container">
+    <article class="idea">
+        <h2 class="idea-title">{{ random_idea.title }}</h2>
+        <span class="idea-meta">
+            <span class="idea-difficulty">{{ random_idea.difficulty_level }}</span> |
+            <span class="idea-user">Posted by: {{random_idea.author}}</span> |
+            <span class="idea-category">{{ random_idea.category_name }}</span>
+        </span>
+        <div class="idea-description">
+            {{ random_idea.description }}
+        </div>
+    </article>
+</section>
+{%endblock%}

@@ -121,11 +121,12 @@ def random_idea():
         'category_id': project.category_id,
         'user_id': project.user_id,
         'created_at': project.created_at,
-        'updated_at': project.updated_at
+        'updated_at': project.updated_at,
+        'author': user.username
     } for user in ideas for project in user.projects
     ]
-
     random_idea = random.choice(projects)
+    
     return render_template('random_idea.html', random_idea = random_idea, title = 'Random Idea')
 
 @app.route('/user_projects', methods = ['GET'])
