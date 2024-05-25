@@ -29,6 +29,12 @@
                             <div class="project_view">
                                 {{project.description}}
                             </div>
+                            <div class="project-actions">
+                                <a href="#" class="btn btn-edit">Edit</a>
+                                <form action="#" method="POST" class="inline-form">
+                                    <button type="submit" class="btn btn-delete">Delete</button>
+                                </form>
+                            </div>
                         </li>
                         {% endfor %}
                     {% endif %}

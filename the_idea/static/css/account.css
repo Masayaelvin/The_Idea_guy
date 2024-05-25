@@ -54,6 +54,7 @@ main {
 
 .sidebar {
     width: 25%;
+    height: auto;
     background-color: #FFFFFF;
     border: 1px solid #D5D5D5;
     border-radius: 8px;
@@ -82,7 +83,7 @@ main {
 .sidebar ul li a:hover,
 .sidebar ul li a.active {
     background-color: #18BC9C;
-    color: #FFFFFF;
+    color:black;
 }
 
 .content {
@@ -116,4 +117,43 @@ main {
 
 .project-list p {
     margin: 5px 0;
+}
+
+/*button styles for the idea tags*/
+
+.project-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.project-actions .btn {
+    display: inline-block;
+    padding: 10px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+    color: #ECF0F1;
+}
+
+.project-actions .btn-edit {
+    background-color: #3498DB;
+}
+
+.project-actions .btn-edit:hover {
+    background-color: #2980B9;
+}
+
+.project-actions .btn-delete {
+    background-color: #E74C3C;
+    border: none;
+    cursor: pointer;
+}
+
+.project-actions .btn-delete:hover {
+    background-color: #C0392B;
+}
+
+.inline-form {
+    display: inline;
+    margin: 0;
 }
