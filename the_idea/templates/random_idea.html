@@ -7,13 +7,18 @@
     <article class="idea">
         <h2 class="idea-title">{{ random_idea.title }}</h2>
         <span class="idea-meta">
-            <span class="idea-difficulty">Difficulty_level: {{ random_idea.difficulty_level }}</span> |
-            <span class="idea-user">Posted by: {{random_idea.author}}</span> |
-            <span class="idea-category">Category: {{ category}}</span>
+            <span class="idea-difficulty"><strong>Difficulty_level:</strong> {{ random_idea.difficulty_level }}</span> |
+            <span class="idea-user"><strong>Posted by:</strong> {{random_idea.author}}</span> |
+            <span class="idea-category"><strong>Category:</strong> {{ category}}</span>
         </span>
         <div class="idea-description">
             {{ random_idea.description|safe}}
         </div>
     </article>
 </section>
+<div class="refresh-button-container">
+    <form action="{{ url_for('random_idea') }}" method="GET">
+        <button type="submit" class="btn btn-refresh">Refresh for another idea</button>
+    </form>
+</div>
 {%endblock%}
