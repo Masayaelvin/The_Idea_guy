@@ -38,10 +38,10 @@
                     <li><a href="{{ url_for('create_idea') }}">Create Idea</a></li>
                     <li><a href="{{ url_for('create_category') }}">Create Category</a></li>
                     <li><a href="{{ url_for('user_projects') }}" class="active">My Projects</a></li>
+                    <li><a href="{{url_for('logout')}}">Logout</a></li>
                 </ul>
             </aside>
-        </div>
-        <a href="{{url_for('logout')}}" class="btn">Logout</a>
+        </div>   
     </main>
 </body>
 {%endblock%}

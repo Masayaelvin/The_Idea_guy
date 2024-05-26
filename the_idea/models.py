@@ -42,6 +42,7 @@ class Categories(db.Model):
     category_name = db.Column(db.String(50), nullable=False)
     created_at = db.Column(db.DateTime, default=db.func.current_timestamp())
     updated_at = db.Column(db.DateTime, default=db.func.current_timestamp())
+    projects = db.relationship('Projects', backref='categories', lazy=True)
 
     def __repr__(self):
         return f'<Categories category_id={self.category_id} category_name={self.category_name}>'

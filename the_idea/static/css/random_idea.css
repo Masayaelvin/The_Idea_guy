@@ -76,6 +76,13 @@ main {
     border-top: 1px solid #191919;
     color: black;
 }
+/* when ckeditor is not active*/
+.idea-description  {
+    margin: 0;
+    line-height: 1.6;
+    border-top: 1px solid #191919;
+    color: black;
+}
 
 
 .refresh-button-container {

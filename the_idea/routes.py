@@ -102,7 +102,7 @@ def random_idea():
     try:
         random_idea = random.choice(projects)
         category = Categories.query.filter_by(category_id = random_idea['category_id']).first()
-        return render_template('random_idea.html', random_idea = random_idea,category=category.category_name, title = 'Random Idea')
+        return render_template('random_idea.html', random_idea = random_idea, category=category.category_name, title = 'Random Idea')
     except IndexError:
         random_idea = [{'project_id':None,
         'title': None,
@@ -145,6 +145,7 @@ def all_Projects():
 @app.route('/user_projects', methods = ['GET'])
 def user_projects():
     users = Users.query.all()
+    user_projects = []
     for user in users:
         users_data = [
             {
@@ -161,14 +162,16 @@ def user_projects():
                 } for project in user.projects]
             }            
         ]
-    return jsonify(users_data)
+        user_projects.append(users_data)
+    return jsonify(user_projects)
     
 
 @app.route('/categories', methods = ['GET'])
 def categories():
     categories = Categories.query.all()
+    category_data = []
     for category in categories:
-        category_data = {
+        category_info =  {
             'category_id': category.category_id,
             'category_name': category.category_name,
             'projects': [{
@@ -180,5 +183,5 @@ def categories():
                 'updated_at': project.updated_at
             } for project in category.projects]
         }
-           
+        category_data.append(category_info)
     return jsonify(category_data)
