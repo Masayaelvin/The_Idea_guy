@@ -7,12 +7,12 @@
     <article class="idea">
         <h2 class="idea-title">{{ random_idea.title }}</h2>
         <span class="idea-meta">
-            <span class="idea-difficulty">{{ random_idea.difficulty_level }}</span> |
+            <span class="idea-difficulty">Difficulty_level: {{ random_idea.difficulty_level }}</span> |
             <span class="idea-user">Posted by: {{random_idea.author}}</span> |
-            <span class="idea-category">{{ random_idea.category_name }}</span>
+            <span class="idea-category">Category: {{ category}}</span>
         </span>
         <div class="idea-description">
-            {{ random_idea.description }}
+            {{ random_idea.description|safe}}
         </div>
     </article>
 </section>

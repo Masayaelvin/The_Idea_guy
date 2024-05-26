@@ -57,7 +57,8 @@ def create_idea():
     form = ProjectForm()
     if form.validate_on_submit():
         project_id = str(uuid.uuid4())
-        project = Projects(project_id = project_id, title = form.title.data, difficulty_level = form.difficulty_level.data, description = form.description.data, category_id = form.category.data, user_id = current_user.id)
+        category_id  = Categories.query.filter_by(category_name = form.category.data).first().category_id
+        project = Projects(project_id = project_id, title = form.title.data, difficulty_level = form.difficulty_level.data, description = form.description.data, category = form.category.data, category_id=category_id, user_id = current_user.id)
         db.session.add(project)
         db.session.commit()
         flash(f'your Project_idea {form.title.data} has been created successfully', 'success')
@@ -81,6 +82,36 @@ def create_category():
 def logout():
     logout_user()
     return redirect(url_for('home'))
+
+@app.route('/random_idea', methods = ['GET'])
+def random_idea():
+    ideas =  Users.query.all()
+    projects = [{
+        'project_id': project.project_id,
+        'title': project.title,
+        'difficulty_level': project.difficulty_level,
+        'description': project.description,
+        'category_id': project.category_id,
+        'user_id': project.user_id,
+        'created_at': project.created_at,
+        'updated_at': project.updated_at,
+        'author': user.username
+    } for user in ideas for project in user.projects
+    ]
+    
+    try:
+        random_idea = random.choice(projects)
+        category = Categories.query.filter_by(category_id = random_idea['category_id']).first()
+        return render_template('random_idea.html', random_idea = random_idea,category=category.category_name, title = 'Random Idea')
+    except IndexError:
+        random_idea = [{'project_id':None,
+        'title': None,
+        'difficulty_level': None,
+        'description': 'No ideas available',
+        'category_id': None,
+        'user_id': None,
+        }]
+        return render_template('random_idea.html', title = 'Random Idea', random_idea = random_idea)
 
 
 
@@ -110,24 +141,6 @@ def all_Projects():
         'updated_at': project.updated_at
     } for project in projects])
     
-@app.route('/random_idea', methods = ['GET'])
-def random_idea():
-    ideas =  Users.query.all()
-    projects = [{
-        'project_id': project.project_id,
-        'title': project.title,
-        'difficulty_level': project.difficulty_level,
-        'description': project.description,
-        'category_id': project.category_id,
-        'user_id': project.user_id,
-        'created_at': project.created_at,
-        'updated_at': project.updated_at,
-        'author': user.username
-    } for user in ideas for project in user.projects
-    ]
-    random_idea = random.choice(projects)
-    
-    return render_template('random_idea.html', random_idea = random_idea, title = 'Random Idea')
 
 @app.route('/user_projects', methods = ['GET'])
 def user_projects():

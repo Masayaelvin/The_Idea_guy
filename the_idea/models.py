@@ -33,9 +33,6 @@ class Projects(db.Model):
     created_at = db.Column(db.DateTime, default=db.func.current_timestamp())
     updated_at = db.Column(db.DateTime, default=db.func.current_timestamp())
 
-    # Relationship to categories
-    category = db.relationship('Categories', backref='projects', lazy=True)
-
     def __repr__(self):
         return f'<Projects project_id={self.project_id} title={self.title}>'
 
@@ -51,4 +48,4 @@ class Categories(db.Model):
 
 # This line creates the tables in the database
 # db.drop_all()
-db.create_all()
+# db.create_all()

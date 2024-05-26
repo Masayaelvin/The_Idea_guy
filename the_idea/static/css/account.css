@@ -83,12 +83,20 @@ main {
 .sidebar ul li a:hover,
 .sidebar ul li a.active {
     background-color: #18BC9C;
-    color:black;
+    color:#FFFFFF;
 }
 
 .content {
     width: 75%;
     padding: 20px;
+}
+
+.project_view {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    border-top: 2px solid #18BC9C;
+
 }
 
 .content h2 {
@@ -117,6 +125,7 @@ main {
 
 .project-list p {
     margin: 5px 0;
+    color:black;
 }
 
 /*button styles for the idea tags*/
