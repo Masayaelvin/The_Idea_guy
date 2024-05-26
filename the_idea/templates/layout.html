@@ -24,7 +24,7 @@
                     <li><a href="{{ url_for('login') }}" class="{{ 'active' if request.endpoint == 'login' else '' }}">Login</a></li>
                     <li><a href="{{ url_for('register') }}" class="{{ 'active' if request.endpoint == 'register' else '' }}">Register</a></li>
                 {% endif %}
-                <li><a href="/view-ideas" class="{{ 'active' if request.path == '/view-ideas' else '' }}">View Ideas</a></li>
+                <li><a href="{{url_for('all_ideas')}}" class="{{ 'active' if request.path == '/view-ideas' else '' }}">View Ideas</a></li>
                 <!-- <li><a href="{{ url_for('create_idea') }}" class="{{ 'active' if request.endpoint == 'create_idea' else '' }}">Create Idea</a></li>
                 <li><a href="{{ url_for('create_category') }}" class="{{ 'active' if request.endpoint == 'create_category' else '' }}">Create Category</a></li> -->
             </ul>

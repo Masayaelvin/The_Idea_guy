@@ -113,6 +113,35 @@ def random_idea():
         }]
         return render_template('random_idea.html', title = 'Random Idea', random_idea = random_idea)
 
+@app.route('/delete_project/<project_id>', methods = ['GET'])
+def delete_project(project_id):
+    project = Projects.query.filter_by(project_id = project_id).first()
+    db.session.delete(project)
+    db.session.commit()
+    flash('Project has been deleted successfully', 'success')
+    return redirect(url_for('account'))
+
+@app.route('/edit_project/<project_id>', methods = ['GET', 'POST'])
+def edit_project(project_id):
+    project = Projects.query.filter_by(project_id = project_id).first()
+    form = ProjectForm()
+    if form.validate_on_submit():
+        project.title = form.title.data
+        project.difficulty_level = form.difficulty_level.data
+        project.description = form.description.data
+        db.session.commit()
+        flash('Project has been updated successfully', 'success')
+        return redirect(url_for('account'))
+    form.title.data = project.title
+    form.difficulty_level.data = project.difficulty_level
+    form.description.data = project.description
+    return render_template('projects.html', form = form, title = 'Edit Project')
+
+@app.route('/all_ideas', methods = ['GET'])
+def all_ideas():
+    projects = Projects.query.all()
+    categories = Categories.query.all()
+    return render_template('all_ideas.html', projects = projects, categories=categories, title = 'All Ideas')
 
 
 '''the api routes for the project'''

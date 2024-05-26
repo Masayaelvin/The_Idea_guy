@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+{% block title %}Browse Projects{% endblock %}
+{% block content %}
+<head>
+    <title>Browse Projects - Idea Guy</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/all_ideas.css') }}">
+</head>
+<main>
+    <section class="search-container">
+        <h1>Browse Projects</h1>
+        <div class="search-filters">
+            <input type="text" id="search-bar" placeholder="Search projects...">
+            <select id="category-filter">
+                <option value="">All Categories</option>
+                {% for category in categories %}
+                <option value="{{ category.category_id }}">{{ category.category_name }}</option>
+                {% endfor %}
+            </select>
+            <select id="difficulty-filter">
+                <option value="">All Difficulty Levels</option>
+                <option value="Beginner">Beginner</option>
+                <option value="Intermediate">Intermediate</option>
+                <option value="Advanced">Advanced</option>
+            </select>
+            <button id="search-button">Search</button>
+        </div>
+    </section>
+    <section class="projects-container">
+        {% for project in projects %}
+        <article class="project-card">
+            <h2>{{ project.title }}</h2>
+            <p><strong>Category:</strong> {{ project.category_name }}</p>
+            <p><strong>Difficulty Level:</strong> {{ project.difficulty_level }}</p>
+            <p class="project-description">{{ project.description }}</p>
+        </article>
+        {% endfor %}
+    </section>
+</main>
+{% endblock %}
