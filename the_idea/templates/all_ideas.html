@@ -7,23 +7,16 @@
 </head>
 <main>
     <section class="search-container">
-        <h1>Browse Ideas</h1>
-        <div class="search-filters">
-            <input type="text" id="search-bar" placeholder="Search projects...">
-            <select id="category-filter">
-                <option value="">All Categories</option>
-                {% for category in categories %}
-                <option value="{{ category.category_id }}">{{ category.category_name }}</option>
-                {% endfor %}
-            </select>
-            <select id="difficulty-filter">
-                <option value="">All Difficulty Levels</option>
-                <option value="Beginner">Beginner</option>
-                <option value="Intermediate">Intermediate</option>
-                <option value="Advanced">Advanced</option>
-            </select>
-            <button id="search-button">Search</button>
-        </div>
+        <h1>{{ title }}</h1>
+        <form method="POST" action="{{ url_for('all_ideas') }}">
+            <div class="search-filters">
+                {{ form.hidden_tag() }}
+                {{ form.search_bar(class="form-control", id="search-bar", placeholder="Search projects...") }}
+                {{ form.category_filter(class="form-control", id="category-filter") }}
+                {{ form.difficulty_filter(class="form-control", id="difficulty-filter") }}
+                {{ form.submit(class="btn", id="search-button") }}
+            </div>
+        </form>
     </section>
     <section class="projects-container">
         {% for project in projects %}
@@ -34,6 +27,9 @@
             <p class="project-description">{{ project.description }}</p>
         </article>
         {% endfor %}
+    </section>
+    <section class="pagination">
+        
     </section>
 </main>
 {% endblock %}

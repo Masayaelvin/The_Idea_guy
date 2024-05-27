@@ -120,3 +120,34 @@ main {
     color: #666;
     line-height: 1.6;
 }
+
+.pagination {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.pagination a,
+.pagination span {
+    margin: 0 5px;
+    padding: 10px 15px;
+    text-decoration: none;
+    color: #2C3E50;
+    border-radius: 5px;
+    border: 1px solid #D5D5D5;
+    transition: background-color 0.3s;
+}
+
+.pagination a:hover {
+    background-color: #18BC9C;
+    color: #FFFFFF;
+}
+
+.pagination .current {
+    background-color: #18BC9C;
+    color: #FFFFFF;
+    cursor: default;
+}
+
+.pagination .ellipsis {
+    cursor: default;
+}

@@ -41,7 +41,7 @@ class CategoryForm(FlaskForm):
     submit = SubmitField('Create Category')
     
 class SearchForm(FlaskForm):
-    search_bar = StringField('Search', validators=[DataRequired()])
+    search_bar = StringField('Search')
     category_filter = SelectField('Category', choices=[('','All Categories')] + [(category.category_id, category.category_name) for category in Categories.query.all()], validators=[DataRequired()])
     difficulty_filter = SelectField('Difficulty Level', choices=[('','All Difficulty Levels'), ('Beginner', 'Beginner'), ('Intermediate', 'Intermediate'), ('Advanced', 'Advanced')], validators=[DataRequired()])
     submit = SubmitField('Search')

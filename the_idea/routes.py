@@ -163,8 +163,8 @@ def all_ideas():
             projects = Projects.query.filter(Projects.title.contains(search), Projects.category_id == category_filter)
         else:
             projects = Projects.query.filter(Projects.title.contains(search), Projects.category_id == category_filter, Projects.difficulty_level == difficulty_filter)
-        return render_template('all_ideas.html', projects = projects, categories=categories, title = 'All Ideas')
-    return render_template('all_ideas.html', projects = projects, categories=categories, title = 'All Ideas')    
+        return render_template('all_ideas.html', projects = projects, form = form, categories=categories, title = 'All Ideas')
+    return render_template('all_ideas.html', projects = projects, form = form, categories=categories, title = 'All Ideas')    
 
 
 '''the api routes for the project'''
