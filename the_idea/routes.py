@@ -1,6 +1,6 @@
 from the_idea import app, db
 from the_idea.models import Users, Projects, Categories
-from the_idea.forms import RegistrationForm, LoginForm, ProjectForm, CategoryForm, SearchForm
+from the_idea.forms import RegistrationForm, LoginForm, ProjectForm, CategoryForm, SearchForm, UpdateProjectForm
 from flask import jsonify, render_template, redirect, url_for, flash, request
 from the_idea import bcrypt
 from flask_login import login_user, current_user, logout_user, login_required
@@ -126,7 +126,7 @@ def delete_project(project_id):
 @login_required
 def edit_project(project_id):
     project = Projects.query.filter_by(project_id = project_id).first()
-    form = ProjectForm()
+    form = UpdateProjectForm()
     if form.validate_on_submit():
         project.title = form.title.data
         project.difficulty_level = form.difficulty_level.data
@@ -137,7 +137,7 @@ def edit_project(project_id):
     form.title.data = project.title
     form.difficulty_level.data = project.difficulty_level
     form.description.data = project.description
-    return render_template('projects.html', form = form, title = 'Edit Project')
+    return render_template('updateidea.html', form = form, title = 'Edit Project')
 
 # @app.route('/all_ideas', methods = ['GET'])
 # def all_ideas():

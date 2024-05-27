@@ -45,3 +45,11 @@ class SearchForm(FlaskForm):
     category_filter = SelectField('Category', choices=[('All Categories','All Categories')] + [(category.category_id, category.category_name) for category in Categories.query.all()], validators=[DataRequired()])
     difficulty_filter = SelectField('Difficulty Level', choices=[('All Difficulty Levels','All Difficulty Levels'), ('Beginner', 'Beginner'), ('Intermediate', 'Intermediate'), ('Advanced', 'Advanced')], validators=[DataRequired()])
     submit = SubmitField('Search')
+
+class UpdateProjectForm(FlaskForm):
+    choices = [(category.category_name, category.category_name) for category in Categories.query.all()]
+    category = SelectField('Category', choices=choices, validators=[DataRequired()])
+    title = StringField('Title', validators=[DataRequired()])
+    difficulty_level = SelectField('Difficulty Level', choices=[('Beginner', 'Beginner'), ('Intermediate', 'Intermediate'), ('Advanced', 'Advanced')], validators=[DataRequired()])
+    description = CKEditorField('Description', validators=[DataRequired()])
+    submit = SubmitField('Update Idea')
