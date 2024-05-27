@@ -11,7 +11,7 @@
         <form method="POST" action="{{ url_for('all_ideas') }}">
             <div class="search-filters">
                 {{ form.hidden_tag() }}
-                {{ form.search_bar(class="form-control", id="search-bar", placeholder="Search projects...") }}
+                {{ form.search_bar(class="form-control", id="search-bar", placeholder="Search projects by title...") }}
                 {{ form.category_filter(class="form-control", id="category-filter") }}
                 {{ form.difficulty_filter(class="form-control", id="difficulty-filter") }}
                 {{ form.submit(class="btn", id="search-button") }}

@@ -114,6 +114,7 @@ main {
 
 .project-card p {
     margin: 5px 0;
+    color: black;
 }
 
 .project-description {

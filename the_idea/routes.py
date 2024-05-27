@@ -146,7 +146,7 @@ def edit_project(project_id):
 #     return render_template('all_ideas.html', projects = projects, categories=categories, title = 'All Ideas')
 
 
-@app.route('/search', methods = ['GET', 'POST'])
+@app.route('/all_ideas', methods = ['GET', 'POST'])
 def all_ideas():
     projects = Projects.query.all()
     categories = Categories.query.all()
@@ -155,11 +155,17 @@ def all_ideas():
         search = form.search_bar.data
         category_filter = form.category_filter.data
         difficulty_filter = form.difficulty_filter.data
-        if category_filter == '' and difficulty_filter == '':
+        if category_filter == 'All Categories' and difficulty_filter == 'All Difficulty Levels':
+            projects = Projects.query.filter(Projects.title.contains(search))
+        elif category_filter == '' and difficulty_filter == '':
             projects = Projects.query.filter(Projects.title.contains(search))
         elif category_filter == '' and difficulty_filter != '':
             projects = Projects.query.filter(Projects.title.contains(search), Projects.difficulty_level == difficulty_filter)
         elif category_filter != '' and difficulty_filter == '':
+            projects = Projects.query.filter(Projects.title.contains(search), Projects.category_id == category_filter)
+        elif category_filter == 'All Categories' and difficulty_filter != '':
+            projects = Projects.query.filter(Projects.title.contains(search), Projects.difficulty_level == difficulty_filter)
+        elif category_filter != 'All Categories' and difficulty_filter == 'All Difficulty Levels':
             projects = Projects.query.filter(Projects.title.contains(search), Projects.category_id == category_filter)
         else:
             projects = Projects.query.filter(Projects.title.contains(search), Projects.category_id == category_filter, Projects.difficulty_level == difficulty_filter)
