@@ -1,6 +1,6 @@
 from the_idea import app, db
 from the_idea.models import Users, Projects, Categories
-from the_idea.forms import RegistrationForm, LoginForm, ProjectForm, CategoryForm
+from the_idea.forms import RegistrationForm, LoginForm, ProjectForm, CategoryForm, SearchForm
 from flask import jsonify, render_template, redirect, url_for, flash, request
 from the_idea import bcrypt
 from flask_login import login_user, current_user, logout_user, login_required
@@ -114,6 +114,7 @@ def random_idea():
         return render_template('random_idea.html', title = 'Random Idea', random_idea = random_idea)
 
 @app.route('/delete_project/<project_id>', methods = ['GET'])
+@login_required
 def delete_project(project_id):
     project = Projects.query.filter_by(project_id = project_id).first()
     db.session.delete(project)
@@ -122,6 +123,7 @@ def delete_project(project_id):
     return redirect(url_for('account'))
 
 @app.route('/edit_project/<project_id>', methods = ['GET', 'POST'])
+@login_required
 def edit_project(project_id):
     project = Projects.query.filter_by(project_id = project_id).first()
     form = ProjectForm()
@@ -137,11 +139,32 @@ def edit_project(project_id):
     form.description.data = project.description
     return render_template('projects.html', form = form, title = 'Edit Project')
 
-@app.route('/all_ideas', methods = ['GET'])
+# @app.route('/all_ideas', methods = ['GET'])
+# def all_ideas():
+#     projects = Projects.query.all()
+#     categories = Categories.query.all()
+#     return render_template('all_ideas.html', projects = projects, categories=categories, title = 'All Ideas')
+
+
+@app.route('/search', methods = ['GET', 'POST'])
 def all_ideas():
     projects = Projects.query.all()
     categories = Categories.query.all()
-    return render_template('all_ideas.html', projects = projects, categories=categories, title = 'All Ideas')
+    form = SearchForm()
+    if form.validate_on_submit():
+        search = form.search_bar.data
+        category_filter = form.category_filter.data
+        difficulty_filter = form.difficulty_filter.data
+        if category_filter == '' and difficulty_filter == '':
+            projects = Projects.query.filter(Projects.title.contains(search))
+        elif category_filter == '' and difficulty_filter != '':
+            projects = Projects.query.filter(Projects.title.contains(search), Projects.difficulty_level == difficulty_filter)
+        elif category_filter != '' and difficulty_filter == '':
+            projects = Projects.query.filter(Projects.title.contains(search), Projects.category_id == category_filter)
+        else:
+            projects = Projects.query.filter(Projects.title.contains(search), Projects.category_id == category_filter, Projects.difficulty_level == difficulty_filter)
+        return render_template('all_ideas.html', projects = projects, categories=categories, title = 'All Ideas')
+    return render_template('all_ideas.html', projects = projects, categories=categories, title = 'All Ideas')    
 
 
 '''the api routes for the project'''

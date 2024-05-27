@@ -2,7 +2,7 @@ from api.v1.app import app
 from the_idea.models import Users, Projects, Categories
 import random
 from flask import jsonify
-
+from the_idea import db
 '''the api routes for the project'''
 
 @app.route('/random_project', methods = ['GET'])
