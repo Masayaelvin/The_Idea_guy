@@ -50,17 +50,22 @@ nav ul li a:hover {
     text-align: center;
     padding: 100px 20px;
     background-color: #18BC9C;
+    background-image: url('../images/small-memory_am1pa2aUmZqaraWkpJRqZmdlrWdtbWU.jpg');
+    background-position: right;
     color: #ECF0F1;
+    animation: fadeIn 2s ease-in-out;
 }
 
 .hero h1 {
     font-size: 3em;
     margin-bottom: 10px;
+    animation: slideInLeft 1s ease-in-out;
 }
 
 .hero p {
     font-size: 1.2em;
     margin-bottom: 20px;
+    animation: slideInRight 1s ease-in-out;
 }
 
 .btn {
@@ -71,15 +76,16 @@ nav ul li a:hover {
     border-radius: 5px;
     font-size: 1.2em;
     transition: background-color 0.3s;
+    animation: zoomIn 1.5s ease-in-out;
 }
 
 .btn:hover {
     background-color: #C0392B;
 }
+
 nav ul li a.active {
     background-color: #18BC9C;
 }
-
 
 /* Flash message styles */
 .alert {
@@ -90,6 +96,7 @@ nav ul li a.active {
     max-width: 600px;
     margin: 20px auto;
     text-align: center;
+    animation: fadeIn 2s ease-in-out;
 }
 
 .alert-success {
@@ -111,7 +118,7 @@ nav ul li a.active {
 }
 
 .alert-info {
-    color:white ;
+    color: white;
     background-color: #4fddf0;
     border-color: #bce8f1;
 }
@@ -145,3 +152,38 @@ nav ul li a.active {
     }
 }
 
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        transform: translateX(-100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes zoomIn {
+    from {
+        transform: scale(0);
+    }
+    to {
+        transform: scale(1);
+    }
+}
