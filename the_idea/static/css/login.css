@@ -47,3 +47,27 @@
 .btn:hover {
     background-color: #16A085;
 }
+
+.link {
+    font-family: 'Arial', sans-serif;
+    font-size: 16px;
+    color: #333;
+    text-align: center;
+    margin: 20px 0;
+}
+
+.link a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s, text-decoration 0.3s;
+}
+
+.link a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+.link a:active {
+    color: #003d80;
+}
