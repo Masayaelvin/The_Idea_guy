@@ -4,7 +4,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, Session
 from the_idea.models import Users, Projects, Categories 
 import random
-# Import your models here
+
 
 SQLALCHEMY_DATABASE_URL = "sqlite:///./instance/the_idea_guy.db"
 
@@ -24,6 +24,8 @@ def get_db():
         yield db
     finally:
         db.close()
+        
+'''api routes for the project'''
 
 @app.get("/random_project")
 def random_project(db: Session = Depends(get_db)):

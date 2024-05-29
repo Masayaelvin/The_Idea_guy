@@ -4,6 +4,7 @@ from the_idea.forms import RegistrationForm, LoginForm, ProjectForm, CategoryFor
 from flask import jsonify, render_template, redirect, url_for, flash, request
 from the_idea import bcrypt
 from flask_login import login_user, current_user, logout_user, login_required
+from datetime import datetime
 import uuid
 import random
 
@@ -131,6 +132,7 @@ def edit_project(project_id):
         project.title = form.title.data
         project.difficulty_level = form.difficulty_level.data
         project.description = form.description.data
+        project.updated_at = datetime.timestamp()
         db.session.commit()
         flash('Project has been updated successfully', 'success')
         return redirect(url_for('account'))
@@ -139,11 +141,6 @@ def edit_project(project_id):
     form.description.data = project.description
     return render_template('updateidea.html', form = form, title = 'Edit Project')
 
-# @app.route('/all_ideas', methods = ['GET'])
-# def all_ideas():
-#     projects = Projects.query.all()
-#     categories = Categories.query.all()
-#     return render_template('all_ideas.html', projects = projects, categories=categories, title = 'All Ideas')
 
 
 @app.route('/all_ideas', methods = ['GET', 'POST'])
@@ -170,7 +167,31 @@ def all_ideas():
         else:
             projects = Projects.query.filter(Projects.title.contains(search), Projects.category_id == category_filter, Projects.difficulty_level == difficulty_filter)
         return render_template('all_ideas.html', projects = projects, form = form, categories=categories, title = 'All Ideas')
-    return render_template('all_ideas.html', projects = projects, form = form, categories=categories, title = 'All Ideas')    
+    return render_template('all_ideas.html', projects = projects, form = form, categories=categories, title = 'All Ideas')   
+
+@app.route('/user_projects', methods = ['GET'])
+def user_projects():
+    users = Users.query.all()
+    user_projects = []
+    for user in users:
+        users_data = [
+            {
+                'id': user.id,
+                'username': user.username,
+                'email': user.email,
+                'projects': [{
+                    'project_id': project.project_id,
+                    'title': project.title,
+                    'difficulty_level': project.difficulty_level,
+                    'description': project.description,
+                    'created_at': project.created_at,
+                    'updated_at': project.updated_at
+                } for project in user.projects]
+            }            
+        ]
+        user_projects.append(users_data)
+    return jsonify(user_projects)
+    
 
 
 '''the api routes for the project'''
@@ -198,30 +219,6 @@ def all_Projects():
         'created_at': project.created_at,
         'updated_at': project.updated_at
     } for project in projects])
-    
-
-@app.route('/user_projects', methods = ['GET'])
-def user_projects():
-    users = Users.query.all()
-    user_projects = []
-    for user in users:
-        users_data = [
-            {
-                'id': user.id,
-                'username': user.username,
-                'email': user.email,
-                'projects': [{
-                    'project_id': project.project_id,
-                    'title': project.title,
-                    'difficulty_level': project.difficulty_level,
-                    'description': project.description,
-                    'created_at': project.created_at,
-                    'updated_at': project.updated_at
-                } for project in user.projects]
-            }            
-        ]
-        user_projects.append(users_data)
-    return jsonify(user_projects)
     
 
 @app.route('/categories', methods = ['GET'])
