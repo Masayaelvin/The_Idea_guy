@@ -24,9 +24,10 @@
             <h2>{{ project.title }}</h2>
             <p><strong>Category:</strong> {{ project.category }}</p>
             <p><strong>Difficulty Level:</strong> {{ project.difficulty_level }}</p>
-            <div class="project-description-container">
-                <p class="project-description">{{ project.description }}</p>
-            </div>
+            <
+            <!-- <div class="project-description-container">
+                <p class="project-description">{{ project.description |safe }}</p>
+            </div> -->
         </article>
         {% endfor %}
     </section>

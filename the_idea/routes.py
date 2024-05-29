@@ -132,7 +132,7 @@ def edit_project(project_id):
         project.title = form.title.data
         project.difficulty_level = form.difficulty_level.data
         project.description = form.description.data
-        project.updated_at = datetime.timestamp()
+        project.updated_at = datetime.now()
         db.session.commit()
         flash('Project has been updated successfully', 'success')
         return redirect(url_for('account'))
@@ -191,6 +191,11 @@ def user_projects():
         ]
         user_projects.append(users_data)
     return jsonify(user_projects)
+
+@app.route('/view_description/<project_id>')
+def view_description(project_id):
+    project = Projects.query.filter_by(project_id = project_id).first()
+    return render_template('description.html', idea = project)
     
 
 
