@@ -50,8 +50,10 @@ nav ul li a:hover {
     text-align: center;
     padding: 100px 20px;
     background-color: #18BC9C;
-    background-image: url('../images/small-memory_am1pa2aUmZqaraWkpJRqZmdlrWdtbWU.jpg');
-    background-position: right;
+    background-image: url('../images/mohamed-nohassi-odxB5oIG_iA-unsplash.jpg');
+    background-size: cover; /* Ensures the image covers the entire container */
+    background-position: left; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
     color: #ECF0F1;
     animation: fadeIn 2s ease-in-out;
 }
@@ -69,7 +71,7 @@ nav ul li a:hover {
 }
 
 .btn {
-    background-color: #E74C3C;
+    background-color: #18BC9C;
     color: #ECF0F1;
     padding: 15px 30px;
     text-decoration: none;
