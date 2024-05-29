@@ -1,9 +1,12 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import sessionmaker, Session
+from the_idea.models import Users, Projects, Categories 
+import random
+# Import your models here
 
-SQLALCHEMY_DATABASE_URL = "sqlite:///./the_idea_guy.db"
+SQLALCHEMY_DATABASE_URL = "sqlite:///./instance/the_idea_guy.db"
 
 engine = create_engine(
     SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False}
@@ -12,15 +15,15 @@ SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 Base = declarative_base()
 
-
 app = FastAPI()
-from fastapi import FastAPI, Depends, HTTPException
-from sqlalchemy.orm import Session
-from the_idea.models import Users, Projects, Categories  # Import your models here
-from database import get_db
-import random
 
-app = FastAPI()
+# Dependency to get the database session
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
 
 @app.get("/random_project")
 def random_project(db: Session = Depends(get_db)):
@@ -138,4 +141,3 @@ def category_project(category: str, db: Session = Depends(get_db)):
             'updated_at': project.updated_at
         } for project in category.projects]
     }
-
