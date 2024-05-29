@@ -2,9 +2,9 @@ from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, Session
-from the_idea.models import Users, Projects, Categories 
+from fastapi.middleware.cors import CORSMiddleware
+from the_idea.models import Users, Projects, Categories  
 import random
-
 
 SQLALCHEMY_DATABASE_URL = "sqlite:///./instance/the_idea_guy.db"
 
@@ -17,6 +17,15 @@ Base = declarative_base()
 
 app = FastAPI()
 
+# Allow CORS for the frontend (optional)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Change to specific origins in production
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 # Dependency to get the database session
 def get_db():
     db = SessionLocal()
@@ -24,8 +33,6 @@ def get_db():
         yield db
     finally:
         db.close()
-        
-'''api routes for the project'''
 
 @app.get("/random_project")
 def random_project(db: Session = Depends(get_db)):
@@ -143,3 +150,9 @@ def category_project(category: str, db: Session = Depends(get_db)):
             'updated_at': project.updated_at
         } for project in category.projects]
     }
+
+# Check if this resolves the issue:
+@app.get("/")
+def read_root():
+    return {"Hello": "Welcome to the 'The Idea Guy'"}
+
