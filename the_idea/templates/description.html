@@ -8,7 +8,7 @@
         <h2 class="idea-title">{{ idea.title }}</h2>
         <span class="idea-meta">
             <span class="idea-difficulty"><strong>Difficulty_level:</strong> {{ idea.difficulty_level }}</span> |
-            <span class="idea-user"><strong>Posted by:</strong> {{idea.author}}</span> |
+            <span class="idea-user"><strong>Posted by:</strong> {{idea.author.username}}</span> |
             <span class="idea-category"><strong>Category:</strong> {{ category}}</span>
         </span>
         <div class="idea-description">
@@ -17,7 +17,7 @@
     </article>
 </section>
 <div class="refresh-button-container">
-    <form action="{{ url_for('random_idea') }}" method="GET">
+    <form action="{{ url_for('all_ideas') }}" method="GET">
         <button type="submit" class="btn btn-refresh">Back<button>
     </form>
 </div>

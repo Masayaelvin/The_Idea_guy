@@ -34,6 +34,7 @@ def get_db():
     finally:
         db.close()
 
+'''this is the code for the random_project endpoint it returns a random project from the database'''
 @app.get("/random_project")
 def random_project(db: Session = Depends(get_db)):
     projects = db.query(Projects).all()
@@ -50,7 +51,8 @@ def random_project(db: Session = Depends(get_db)):
         'created_at': random_project.created_at,
         'updated_at': random_project.updated_at
     }
-
+    
+'''this is the code for the users endpoint it returns all the users in the database'''
 @app.get("/users")
 def get_users(db: Session = Depends(get_db)):
     users = db.query(Users).all()
@@ -61,7 +63,9 @@ def get_users(db: Session = Depends(get_db)):
         'created_at': user.created_at,
         'updated_at': user.updated_at
     } for user in users]
-
+    
+    
+'''this is the code for the projects endpoint it returns all the projects in the database'''
 @app.get("/projects")
 def get_projects(db: Session = Depends(get_db)):
     projects = db.query(Projects).all()
@@ -76,6 +80,8 @@ def get_projects(db: Session = Depends(get_db)):
         'updated_at': project.updated_at
     } for project in projects]
 
+
+'''this is the code for the user_projects endpoint it returns all the users and the projects they have created'''
 @app.get("/user_projects")
 def user_projects(db: Session = Depends(get_db)):
     users = db.query(Users).all()
@@ -97,6 +103,7 @@ def user_projects(db: Session = Depends(get_db)):
         user_projects.append(user_data)
     return user_projects
 
+'''this is the code for the categories endpoint it returns all the categories and the projects in each category'''
 @app.get("/categories")
 def get_categories(db: Session = Depends(get_db)):
     categories = db.query(Categories).all()
@@ -117,6 +124,9 @@ def get_categories(db: Session = Depends(get_db)):
         category_data.append(category_info)
     return category_data
 
+
+'''this is the code for the difficulty endpoint  it
+gets the difficulty level and returns the projects in that difficulty level'''
 @app.get("/filter/{difficulty}")
 def filter_project(difficulty: str, db: Session = Depends(get_db)):
     projects = db.query(Projects).filter_by(difficulty_level=difficulty).all()
@@ -132,7 +142,9 @@ def filter_project(difficulty: str, db: Session = Depends(get_db)):
         'created_at': project.created_at,
         'updated_at': project.updated_at
     } for project in projects]
-
+    
+'''this is the code for the category endpoint  it 
+gets the category name and returns the projects in that category'''
 @app.get("/category/{category}")
 def category_project(category: str, db: Session = Depends(get_db)):
     category = db.query(Categories).filter_by(category_name=category).first()
@@ -150,6 +162,8 @@ def category_project(category: str, db: Session = Depends(get_db)):
             'updated_at': project.updated_at
         } for project in category.projects]
     }
+
+
 
 # Check if this resolves the issue:
 @app.get("/")

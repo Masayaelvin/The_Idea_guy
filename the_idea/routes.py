@@ -193,7 +193,7 @@ def user_projects():
     return jsonify(user_projects)
 
 @app.route('/view_description/<project_id>')
-def view_description(project_id):
+def description(project_id):
     project = Projects.query.filter_by(project_id = project_id).first()
     return render_template('description.html', idea = project)
     

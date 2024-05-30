@@ -108,6 +108,7 @@ main {
     gap: 20px;
 }
 
+
 .project-card {
     background-color: #FFFFFF;
     border: 1px solid #D5D5D5;
@@ -131,6 +132,19 @@ main {
     color: #666;
     line-height: 1.6;
 }
+
+.project-card-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.project-card-link:hover .project-card {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    border-radius: 25px;
+    border: 3px solid red;
+    transition: 1s;
+}
+
 
 .pagination {
     text-align: center;
