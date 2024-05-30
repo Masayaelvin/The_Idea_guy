@@ -20,11 +20,12 @@
     </section>
     <section class="projects-container">
         {% for project in projects %}
+        <a href="url_for('view_description, project_id = project.project_id')">
         <article class="project-card">
             <h2>{{ project.title }}</h2>
             <p><strong>Category:</strong> {{ project.category }}</p>
             <p><strong>Difficulty Level:</strong> {{ project.difficulty_level }}</p>
-            <
+        </a>
             <!-- <div class="project-description-container">
                 <p class="project-description">{{ project.description |safe }}</p>
             </div> -->
