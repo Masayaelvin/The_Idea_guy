@@ -108,11 +108,6 @@ Additionally, the application includes CORS middleware to handle cross-origin re
 - **Collaboration Features**: Facilitate collaboration between developers by allowing them to share ideas, join projects, and collaborate on innovative solutions.
 - **Integration with Development Tools**: Seamlessly integrate Idea Guy with popular development platforms and tools to streamline the project implementation process.
 
-## Contributing
-Contributions are welcome! Please read the [contributing guidelines](CONTRIBUTING.md) first.
-
-## License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## About the Developer
 **masayaelvin@gmail.com** - A passionate backend developer dedicated to empowering the developer community with innovative tools and resources.
@@ -122,5 +117,3 @@ Connect with me on [LinkedIn](https://www.linkedin.com/in/elvin-masaya/) or foll
 ---
 
 *Inspire. Create. Innovate with Idea Guy.*
-
-![Footer Image](path-to-your-footer-image)
