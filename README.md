@@ -29,7 +29,7 @@ The **Idea Guy** API is a  tool designed to provide software engineers and devel
 1. **Clone the repository:**
     ```bash
     git clone https://github.com/Masayaelvin/The_Idea_guy-api.git
-    cd The_Idea-guy/api
+    cd The_Idea_guy/api
     ```
 
 2. **Create and activate a virtual environment:**
