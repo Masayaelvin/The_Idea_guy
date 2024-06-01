@@ -5,6 +5,7 @@ from flask_ckeditor import CKEditorField
 from the_idea.models import Categories
 from the_idea.models import Users
 
+
 class RegistrationForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired(), Length(min=2, max=20)])
     email = StringField('Email', validators=[DataRequired(), Email()])
