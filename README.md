@@ -1,6 +1,6 @@
 # Idea Guy API - Empowering Developers with Random Project Ideas
 
-![Idea Guy Logo](https://drive.google.com/file/d/1FN0_z4pIgM4285IyNz9JtVUwymo-2U6Z/view?usp=drive_link)
+![Idea Guy Logo](https://github.com/Masayaelvin/The_Idea_guy/blob/main/the_idea/static/images/nick-fewings-j8OIk-G8wpw-unsplash%20(1).jpg)
 
 ## Overview
 The **Idea Guy** API is a  tool designed to provide software engineers and developers with random project ideas across various domains. Whether you're a seasoned developer looking for a new challenge or a novice eager to embark on your coding journey, Idea Guy is here to inspire creativity and innovation.
