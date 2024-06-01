@@ -9,7 +9,7 @@
         {{ form.hidden_tag() }}
         <div class="form-group">
             {{form.category_name.label}}
-            {{ form.category_name(class="form-control") }}
+            {{ form.category_name(class="form-control", placeholder="type category i.e backend, frontend ...") }}
         </div>
         <button type="submit" class="btn">
             {{ form.submit.label }}

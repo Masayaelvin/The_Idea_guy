@@ -64,6 +64,7 @@ def create_idea():
         db.session.commit()
         flash(f'your Project_idea {form.title.data} has been created successfully', 'success')
         return redirect(url_for('account'))
+    import the_idea.forms
     return render_template('projects.html', form = form, title = 'Create Project')
 
 @app.route('/create_category', methods = ['GET', 'POST'])
@@ -77,6 +78,7 @@ def create_category():
         db.session.commit()
         flash(f'Category {form.category_name.data} has been created successfully', 'success')
         return redirect(url_for('account'))
+    import the_idea.forms
     return render_template('categories.html', form = form, title = 'Create Category')
 
 @app.route('/logout', methods = ['GET'])
