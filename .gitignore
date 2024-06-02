@@ -2,3 +2,7 @@
 __pycache__/
 instance/
 .vercel
+.env*.local
+
+/node_modules
+
