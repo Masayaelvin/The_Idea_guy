@@ -1,3 +1,4 @@
 .theidea/
 __pycache__/
 instance/
+.vercel
