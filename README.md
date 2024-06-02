@@ -64,7 +64,7 @@ The **Idea Guy** API is a  tool designed to provide software engineers and devel
 
 ### Example API Call
 ```bash
-curl -X GET http://localhost:5000/api/random_idea"
+curl -X GET http://localhost:8000/random_project
 ```
 
 ## API Endpoints

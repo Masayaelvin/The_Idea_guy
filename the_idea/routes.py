@@ -87,7 +87,7 @@ def logout():
     return redirect(url_for('home'))
 
 @app.route('/random_idea', methods = ['GET'])
-def random_idea():
+def random_idea():    
     ideas =  Users.query.all()
     projects = [{
         'project_id': project.project_id,
