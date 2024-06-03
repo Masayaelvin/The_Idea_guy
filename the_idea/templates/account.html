@@ -1,9 +1,5 @@
 {%extends 'layout.html'%}
 {%block content%}
-<head>
-    <title>Account - Idea Guy</title>
-    <link rel="stylesheet" href="{{url_for('static', filename='css/account.css')}}">
-</head>
 <body>
     <main>
         <div class="account-container">
@@ -41,5 +37,11 @@
             </aside>
         </div>   
     </main>
+    <script>
+        document.getElementById('menu-icon').addEventListener('click', function() {
+            var menu = document.getElementById('menu');
+            menu.classList.toggle('active');
+        });
+    </script>
 </body>
 {%endblock%}
