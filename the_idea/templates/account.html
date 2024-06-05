@@ -1,6 +1,10 @@
 {%extends 'layout.html'%}
 {%block content%}
 <body>
+    <head>
+        <title>Browse Ideas- Idea Guy</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/account.css') }}">
+    </head>
     <main>
         <div class="account-container">
             <section class="content">
@@ -37,11 +41,5 @@
             </aside>
         </div>   
     </main>
-    <script>
-        document.getElementById('menu-icon').addEventListener('click', function() {
-            var menu = document.getElementById('menu');
-            menu.classList.toggle('active');
-        });
-    </script>
 </body>
 {%endblock%}
