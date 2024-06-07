@@ -48,7 +48,7 @@ main {
 }
 
 .project_view {
-    display: flex;
+    /* display: flex; */
     align-items: center;
     margin-bottom: 20px;
     border-top: 2px solid #18BC9C;

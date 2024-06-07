@@ -9,7 +9,7 @@
         <span class="idea-meta">
             <span class="idea-difficulty"><strong>Difficulty_level:</strong> {{ idea.difficulty_level }}</span> |
             <span class="idea-user"><strong>Posted by:</strong> {{idea.author.username}}</span> |
-            <span class="idea-category"><strong>Category:</strong> {{ category}}</span>
+            <span class="idea-category"><strong>Category:</strong> {{ idea.category}}</span>
         </span>
         <div class="idea-description">
             {{ idea.description|safe}}
