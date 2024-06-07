@@ -79,3 +79,16 @@ body {
 .link a:active {
     color: #003d80;
 }
+
+ul {
+    padding-left: 20px;
+    color: #E74C3C; /* Error message color */
+}
+
+ul li {
+    list-style-type: none;
+}
+
+.form-group input.error {
+    border-color: #E74C3C; /* Error border color */
+}
