@@ -101,7 +101,7 @@ def random_idea():
         'author': user.username
     } for user in ideas for project in user.projects
     ]
-    
+    random.shuffle(projects)
     try:
         random_idea = random.choice(projects)
         category = Categories.query.filter_by(category_id = random_idea['category_id']).first()
