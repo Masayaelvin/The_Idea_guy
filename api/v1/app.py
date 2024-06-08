@@ -170,6 +170,10 @@ def read_root():
         "Hello": "Welcome to 'The Idea Guy'",
         
         "endpoints": {
+            "/docs": {
+                "method": "GET",
+                "description":" FastAPI documentation for the API."
+                },
             "/random_project": {
                 "method": "GET",
                 "description": "Returns a random project from the database. If no projects are found, it raises a 404 error."
