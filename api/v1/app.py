@@ -166,7 +166,48 @@ def category_project(category: str, db: Session = Depends(get_db)):
 
 
 # Check if this resolves the issue:
+from fastapi import FastAPI
+
+app = FastAPI()
+
 @app.get("/")
 def read_root():
-    return {"Hello": "Welcome to the 'The Idea Guy'"}
+    return {
+        "Hello": "Welcome to 'The Idea Guy'",
+        "endpoints": {
+            "/random_project": {
+                "method": "GET",
+                "description": "Returns a random project from the database. If no projects are found, it raises a 404 error."
+            },
+            "/users": {
+                "method": "GET",
+                "description": "Retrieves and returns a list of all users in the database, including their ID, username, email, and timestamps for creation and updates."
+            },
+            "/projects": {
+                "method": "GET",
+                "description": "Retrieves and returns a list of all projects in the database, including project details such as ID, title, difficulty level, description, category ID, user ID, and timestamps for creation and updates."
+            },
+            "/user_projects": {
+                "method": "GET",
+                "description": "Returns a list of all users along with the projects they have created. Each user's information includes their ID, username, email, and a list of their projects with project details."
+            },
+            "/categories": {
+                "method": "GET",
+                "description": "Retrieves and returns a list of all categories along with the projects within each category. Each category's information includes its ID, name, and a list of projects with project details."
+            },
+            "/filter/{difficulty}": {
+                "method": "GET",
+                "description": "Filters and returns projects based on the specified difficulty level. If no projects are found for the given difficulty, it raises a 404 error."
+            },
+            "/category/{category}": {
+                "method": "GET",
+                "description": "Retrieves and returns projects within a specified category. If the category is not found, it raises a 404 error. Each category's information includes its ID, name, and a list of projects with project details."
+            },
+            "/": {
+                "method": "GET",
+                "description": "A root endpoint that returns a welcome message along with explanations of all other endpoints."
+            }
+        }
+    }
+
 
