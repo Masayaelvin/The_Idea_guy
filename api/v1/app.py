@@ -164,16 +164,11 @@ def category_project(category: str, db: Session = Depends(get_db)):
     }
 
 
-
-# Check if this resolves the issue:
-from fastapi import FastAPI
-
-app = FastAPI()
-
 @app.get("/")
 def read_root():
     return {
         "Hello": "Welcome to 'The Idea Guy'",
+        
         "endpoints": {
             "/random_project": {
                 "method": "GET",
